@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROJECTS } from "@/lib/data";
 import { Project } from "@/types";
@@ -141,10 +142,11 @@ const ProjectCard = ({
             {/* Image Area */}
             <div className="aspect-video bg-offwhite/10 flex items-center justify-center overflow-hidden mb-6 relative transition-colors duration-500 group-hover:bg-offwhite/15">
                 {project.imageUrl ? (
-                    <img
+                    <Image
                         src={project.imageUrl}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                 ) : (
                     <span className="text-4xl opacity-40">

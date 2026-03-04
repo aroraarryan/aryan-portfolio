@@ -62,7 +62,7 @@ const Contact = () => {
             <div className="container-site">
                 <span className="section-label">Get in Touch</span>
                 <h2 className="display-sm mt-2 mb-4">
-                    Let's build something<br />
+                    Let&apos;s build something<br />
                     <em className="text-rust not-italic">great together.</em>
                 </h2>
                 <p className="text-muted text-base mb-12 max-w-lg">
@@ -109,7 +109,7 @@ const Contact = () => {
                                     </div>
                                     <h3 className="display-sm mb-4">Message sent!</h3>
                                     <p className="text-muted text-sm mb-8">
-                                        I'll get back to you within 24 hours.
+                                        I&apos;ll get back to you within 24 hours.
                                     </p>
                                     <button
                                         onClick={() => setStatus("idle")}
