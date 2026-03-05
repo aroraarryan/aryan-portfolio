@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Analytics } from "@vercel/analytics/react";
-import Navbar from "@/components/layout/Navbar";
+
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -84,8 +84,7 @@ export default function RootLayout({
                 className={`${fraunces.variable} ${dmSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}
             >
                 <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-                    <Navbar />
-                    <main>{children}</main>
+                    {children}
                     <Analytics />
                 </ThemeProvider>
             </body>
