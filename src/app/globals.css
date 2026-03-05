@@ -163,6 +163,19 @@
   .btn-outline:hover {
     @apply bg-[#5c1a0f] text-[#f0ece0] border-[#5c1a0f];
   }
+
+  .footer-link {
+    @apply relative inline-block transition-colors duration-300;
+  }
+
+  .footer-link::after {
+    content: "";
+    @apply absolute bottom-[-2px] left-0 h-[1px] bg-[var(--color-rust)] transition-all duration-300 ease-in-out w-0;
+  }
+
+  .footer-link:hover::after {
+    @apply w-full;
+  }
 }
 
 @layer utilities {

@@ -73,7 +73,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     href="#projects"
-                                    className="text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust transition-colors duration-300 block mb-2"
+                                    className="footer-link text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust mb-2"
                                 >
                                     Projects
                                 </Link>
@@ -81,7 +81,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     href="#services"
-                                    className="text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust transition-colors duration-300 block mb-2"
+                                    className="footer-link text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust mb-2"
                                 >
                                     Services
                                 </Link>
@@ -90,7 +90,7 @@ const Footer = () => {
                                 <a
                                     href="/Aryan_resume.pdf"
                                     download
-                                    className="text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust transition-colors duration-300 block mb-2"
+                                    className="footer-link text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust mb-2"
                                 >
                                     Download CV
                                 </a>
@@ -105,7 +105,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     href="#about"
-                                    className="text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust transition-colors duration-300 block mb-2"
+                                    className="footer-link text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust mb-2"
                                 >
                                     About
                                 </Link>
@@ -113,7 +113,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     href="#resume"
-                                    className="text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust transition-colors duration-300 block mb-2"
+                                    className="footer-link text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust mb-2"
                                 >
                                     Resume
                                 </Link>
@@ -121,7 +121,7 @@ const Footer = () => {
                             <li>
                                 <Link
                                     href="#contact"
-                                    className="text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust transition-colors duration-300 block mb-2"
+                                    className="footer-link text-sm text-inkbrown dark:text-offwhite/70 hover:text-rust mb-2"
                                 >
                                     Contact
                                 </Link>
