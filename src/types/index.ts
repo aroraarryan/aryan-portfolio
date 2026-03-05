@@ -29,7 +29,6 @@ export interface Service {
     title: string;
     description: string;
     deliverables: string[];
-    startingPrice?: string;
 }
 
 export interface Testimonial {
@@ -45,7 +44,6 @@ export interface ContactFormData {
     email: string;
     subject: string;
     projectType: string;
-    budget?: string;
     message: string;
     honeypot?: string;
 }

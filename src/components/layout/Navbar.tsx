@@ -27,8 +27,8 @@ const Navbar = () => {
     const navClasses = cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-300 h-[var(--nav-height)]",
         scrolled
-            ? "bg-[#f5f0e8]/90 dark:bg-[#1a1008]/90 backdrop-blur-md border-b border-[rgba(42,26,14,0.1)] dark:border-[rgba(240,236,224,0.1)]"
-            : "bg-transparent"
+            ? "bg-[#f5f0e8]/90 dark:bg-[#1a1008]/90 backdrop-blur-md border-b border-[rgba(42,26,14,0.1)] dark:border-[rgba(240,236,224,0.1)] text-[#2a1a0e] dark:text-[#f0ece0]"
+            : "bg-transparent text-[#f0ece0]"
     );
 
     if (!mounted) return <header className={navClasses} />;
@@ -37,7 +37,7 @@ const Navbar = () => {
         <header className={navClasses}>
             <div className="container-site flex items-center justify-between h-full">
                 {/* Logo */}
-                <Link href="/" className="text-xl font-fraunces flex items-center gap-0.5">
+                <Link href="/" className="text-xl font-fraunces flex items-center gap-0.5 text-[var(--color-inkbrown)] transition-colors hover:text-white">
                     <span className="font-extrabold tracking-tight">Aryan</span>
                     <span className="font-light">Arora</span>
                     <span className="w-1.5 h-1.5 bg-[#5c1a0f] rounded-full mt-2" />
@@ -49,7 +49,10 @@ const Navbar = () => {
                         <Link
                             key={item.label}
                             href={item.href}
-                            className="nav-link"
+                            className={cn(
+                                "nav-link transition-colors",
+                                (!scrolled || theme === "dark") ? "hover:text-white" : "hover:text-[#5c1a0f]"
+                            )}
                         >
                             {item.label}
                         </Link>
@@ -128,7 +131,7 @@ const Navbar = () => {
                                         key={item.label}
                                         href={item.href}
                                         onClick={() => setMenuOpen(false)}
-                                        className="px-6 py-4 label-sm text-inkbrown/70 dark:text-offwhite/70 border-b border-[rgba(42,26,14,0.05)] dark:border-[rgba(240,236,224,0.05)] hover:bg-[rgba(42,26,14,0.02)]"
+                                        className="px-6 py-4 label-sm text-inkbrown/70 dark:text-offwhite/70 border-b border-[rgba(42,26,14,0.05)] dark:border-[rgba(240,236,224,0.05)] hover:bg-[rgba(42,26,14,0.02)] hover:text-white transition-colors"
                                     >
                                         {item.label}
                                     </Link>

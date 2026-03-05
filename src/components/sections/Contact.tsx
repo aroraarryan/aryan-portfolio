@@ -14,7 +14,6 @@ const contactSchema = z.object({
     projectType: z.enum(["web", "ai", "fullstack", "landing", "other"], {
         errorMap: () => ({ message: "Please select a project type" }),
     }),
-    budget: z.string().optional(),
     message: z.string().min(20, "Message must be at least 20 characters"),
     honeypot: z.string().max(0, "Spam detected"),
 });
@@ -58,175 +57,188 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="bg-linen dark:bg-[#0d0603] section-pad border-t border-[var(--color-border-light)]">
+        <section id="contact" className="bg-linen dark:bg-[#0d0603] section-pad border-t border-[var(--color-border-light)] overflow-hidden">
             <div className="container-site">
-                <span className="section-label">Get in Touch</span>
-                <h2 className="display-sm mt-2 mb-4">
-                    Let&apos;s build something<br />
-                    <em className="text-rust not-italic">great together.</em>
-                </h2>
-                <p className="text-muted text-base mb-12 max-w-lg">
-                    Whether you need a full product, a landing page, or an AI-powered feature — response within 24 hours.
-                </p>
+                <div className="flex flex-col lg:flex-row gap-16 xl:gap-24">
+                    {/* LEFT — Intro & Info */}
+                    <div className="lg:w-1/3 space-y-12">
+                        <div>
+                            <span className="section-label mb-8 block">Connect</span>
+                            <h2 className="display-sm mt-4 mb-6 leading-[1.1]">
+                                Let&apos;s build something<br />
+                                <em className="text-rust not-italic serif">extraordinary.</em>
+                            </h2>
+                            <p className="text-muted text-sm leading-relaxed max-w-sm">
+                                Have a project in mind or just want to say hello?
+                                I typically respond within 24 hours.
+                            </p>
+                        </div>
 
-                <div className="grid lg:grid-cols-2 gap-16 items-start">
-                    {/* LEFT — contact info */}
-                    <div className="space-y-0">
-                        <ContactInfoRow
-                            emoji="📧"
-                            label="EMAIL"
-                            value="aryanarora28march@gmail.com"
-                            href="mailto:aryanarora28march@gmail.com"
-                        />
-                        <ContactInfoRow
-                            emoji="📱"
-                            label="PHONE"
-                            value="+91 82720 60480"
-                            href="tel:+918272060480"
-                        />
-                        <ContactInfoRow
-                            emoji="💼"
-                            label="LINKEDIN"
-                            value="linkedin.com/in/aroraarryan"
-                            href="https://linkedin.com/in/aroraarryan"
-                            isExternal
-                        />
+                        <div className="space-y-0 border-t border-[var(--color-border-light)]">
+                            <ContactInfoRow
+                                emoji="📧"
+                                label="EMAIL"
+                                value="aryanarora28march@gmail.com"
+                                href="mailto:aryanarora28march@gmail.com"
+                            />
+                            <ContactInfoRow
+                                emoji="📱"
+                                label="PHONE"
+                                value="+91 82720 60480"
+                                href="tel:+918272060480"
+                            />
+                            <ContactInfoRow
+                                emoji="🔗"
+                                label="LINKEDIN"
+                                value="linkedin.com/in/aroraarryan"
+                                href="https://linkedin.com/in/aroraarryan"
+                                isExternal
+                            />
+                        </div>
                     </div>
 
-                    {/* RIGHT — form card */}
-                    <div className="bg-white dark:bg-[#1a1a14] border border-[var(--color-border-light)] p-10 shadow-sm">
-                        <AnimatePresence mode="wait">
-                            {status === "success" ? (
-                                <motion.div
-                                    key="success"
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    className="text-center py-12"
-                                >
-                                    <div className="w-16 h-16 bg-rust/10 text-rust rounded-full flex items-center justify-center mx-auto mb-6 text-2xl border border-rust/20">
-                                        ✓
-                                    </div>
-                                    <h3 className="display-sm mb-4">Message sent!</h3>
-                                    <p className="text-muted text-sm mb-8">
-                                        I&apos;ll get back to you within 24 hours.
-                                    </p>
-                                    <button
-                                        onClick={() => setStatus("idle")}
-                                        className="text-sm text-rust font-medium hover:underline"
+                    {/* RIGHT — The Form */}
+                    <div className="lg:w-2/3">
+                        <div className="bg-white/50 dark:bg-[#1a1a14]/30 backdrop-blur-sm border border-[var(--color-border-light)] p-8 md:p-12 lg:p-16 relative">
+                            {/* Decorative Corner */}
+                            <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-rust/30 pointer-events-none" />
+
+                            <AnimatePresence mode="wait">
+                                {status === "success" ? (
+                                    <motion.div
+                                        key="success"
+                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.95 }}
+                                        className="text-center py-20"
                                     >
-                                        Send another
-                                    </button>
-                                </motion.div>
-                            ) : (
-                                <motion.form
-                                    key="form"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    onSubmit={handleSubmit(onSubmit)}
-                                    className="space-y-6"
-                                >
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <FormField label="Full Name" error={errors.name?.message}>
-                                            <input
-                                                {...register("name")}
-                                                placeholder="Aryan Arora"
-                                                className={cn("input-base", errors.name && "border-red-400")}
+                                        <div className="w-20 h-20 bg-rust text-white flex items-center justify-center mx-auto mb-8 text-3xl">
+                                            ✓
+                                        </div>
+                                        <h3 className="display-sm mb-4">Transmission Received</h3>
+                                        <p className="text-muted text-sm mb-10 max-w-xs mx-auto leading-relaxed">
+                                            Thank you for reaching out. I will review your inquiry and get back to you shortly.
+                                        </p>
+                                        <button
+                                            onClick={() => setStatus("idle")}
+                                            className="text-xs uppercase tracking-[0.2em] font-bold text-rust hover:text-inkbrown dark:hover:text-offwhite transition-colors"
+                                        >
+                                            [ Send Another Message ]
+                                        </button>
+                                    </motion.div>
+                                ) : (
+                                    <motion.form
+                                        key="form"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        onSubmit={handleSubmit(onSubmit)}
+                                        className="space-y-10"
+                                    >
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
+                                            <FormField label="Full Name" error={errors.name?.message}>
+                                                <input
+                                                    {...register("name")}
+                                                    placeholder="e.g. Aryan Arora"
+                                                    className={cn("input-minimal", errors.name && "border-red-400")}
+                                                />
+                                            </FormField>
+                                            <FormField label="Email Address" error={errors.email?.message}>
+                                                <input
+                                                    {...register("email")}
+                                                    placeholder="hello@example.com"
+                                                    className={cn("input-minimal", errors.email && "border-red-400")}
+                                                />
+                                            </FormField>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
+                                            <FormField label="Subject / Topic" error={errors.subject?.message}>
+                                                <input
+                                                    {...register("subject")}
+                                                    placeholder="Project Inquiry"
+                                                    className={cn("input-minimal", errors.subject && "border-red-400")}
+                                                />
+                                            </FormField>
+                                            <FormField label="Service Required" error={errors.projectType?.message}>
+                                                <select
+                                                    {...register("projectType")}
+                                                    className={cn("input-minimal appearance-none", errors.projectType && "border-red-400")}
+                                                >
+                                                    <option value="">Select service...</option>
+                                                    <option value="web">Web Development</option>
+                                                    <option value="ai">AI Integration</option>
+                                                    <option value="fullstack">Full-Stack Solution</option>
+                                                    <option value="landing">Premium Landing Page</option>
+                                                    <option value="other">Other Inquiry</option>
+                                                </select>
+                                            </FormField>
+                                        </div>
+
+                                        <FormField label="Your Message" error={errors.message?.message}>
+                                            <textarea
+                                                {...register("message")}
+                                                rows={4}
+                                                placeholder="Tell me about your objectives..."
+                                                className={cn("input-minimal resize-none pt-4", errors.message && "border-red-400")}
                                             />
                                         </FormField>
-                                        <FormField label="Email Address" error={errors.email?.message}>
-                                            <input
-                                                {...register("email")}
-                                                placeholder="hello@example.com"
-                                                className={cn("input-base", errors.email && "border-red-400")}
-                                            />
-                                        </FormField>
-                                    </div>
 
-                                    <FormField label="Subject" error={errors.subject?.message}>
-                                        <input
-                                            {...register("subject")}
-                                            placeholder="What's this about?"
-                                            className={cn("input-base", errors.subject && "border-red-400")}
-                                        />
-                                    </FormField>
+                                        <input type="text" {...register("honeypot")} className="sr-only" tabIndex={-1} aria-hidden="true" />
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <FormField label="Project Type" error={errors.projectType?.message}>
-                                            <select
-                                                {...register("projectType")}
-                                                className={cn("input-base", errors.projectType && "border-red-400")}
+                                        <div className="pt-4">
+                                            <button
+                                                type="submit"
+                                                disabled={status === "loading"}
+                                                className="btn-rust w-full md:w-auto px-12 py-5 justify-center disabled:opacity-60 disabled:cursor-not-allowed group relative overflow-hidden"
                                             >
-                                                <option value="">Select type...</option>
-                                                <option value="web">Web App</option>
-                                                <option value="fullstack">Full-Stack</option>
-                                                <option value="ai">AI Integration</option>
-                                                <option value="landing">Landing Page</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </FormField>
-                                        <FormField label="Budget Range" error={errors.budget?.message}>
-                                            <select
-                                                {...register("budget")}
-                                                className={cn("input-base", errors.budget && "border-red-400")}
-                                            >
-                                                <option value="">Select range...</option>
-                                                <option value="under-5k">Under ₹5,000</option>
-                                                <option value="5k-15k">₹5,000–₹15,000</option>
-                                                <option value="15k-30k">₹15,000–₹30,000</option>
-                                                <option value="30k-plus">₹30,000+</option>
-                                            </select>
-                                        </FormField>
-                                    </div>
+                                                <span className="relative z-10 flex items-center gap-3">
+                                                    {status === "loading" ? "SENDING..." : "INITIALIZE CONTACT"}
+                                                    {!status.includes("loading") && <span className="text-lg">→</span>}
+                                                </span>
+                                            </button>
 
-                                    <FormField label="Message" error={errors.message?.message}>
-                                        <textarea
-                                            {...register("message")}
-                                            rows={5}
-                                            placeholder="Tell me about your project dreams..."
-                                            className={cn("input-base resize-none", errors.message && "border-red-400")}
-                                        />
-                                    </FormField>
-
-                                    <input type="text" {...register("honeypot")} className="sr-only" tabIndex={-1} aria-hidden="true" />
-
-                                    {status === "error" && (
-                                        <p className="text-xs text-red-400 text-center">Something went wrong — please try again.</p>
-                                    )}
-
-                                    <button
-                                        type="submit"
-                                        disabled={status === "loading"}
-                                        className="btn-rust w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed group"
-                                    >
-                                        {status === "loading" ? "Sending..." : "Send Message"}
-                                    </button>
-                                </motion.form>
-                            )}
-                        </AnimatePresence>
+                                            {status === "error" && (
+                                                <p className="text-xs text-red-500 mt-4 font-mono uppercase tracking-wider">
+                                                    Error: Unable to transmit message. Please try again.
+                                                </p>
+                                            )}
+                                        </div>
+                                    </motion.form>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <style jsx>{`
-                .input-base {
+                .input-minimal {
                     width: 100%;
-                    border: 1px solid var(--color-border-light);
-                    padding: 12px 16px;
+                    border: none;
+                    border-bottom: 1px solid var(--color-border-light);
+                    padding: 8px 0 12px 0;
                     background: transparent;
                     font-family: inherit;
-                    font-size: 0.875rem;
+                    font-size: 0.95rem;
                     color: var(--color-inkbrown);
                     outline: none;
-                    transition: border-color var(--transition);
+                    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
                     border-radius: 0;
                 }
-                .dark .input-base {
+                .dark .input-minimal {
                     color: var(--color-offwhite);
                 }
-                .input-base:focus {
+                .input-minimal:focus {
                     border-color: var(--color-rust);
+                    padding-left: 8px;
+                }
+                .input-minimal::placeholder {
+                    color: var(--color-muted);
+                    opacity: 0.5;
+                }
+                select.input-minimal {
+                    cursor: pointer;
                 }
             `}</style>
         </section>
@@ -242,17 +254,17 @@ interface ContactInfoRowProps {
 }
 
 const ContactInfoRow = ({ emoji, label, value, href, isExternal }: ContactInfoRowProps) => (
-    <div className="flex items-center gap-4 py-4 border-b border-[var(--color-border-light)] group">
-        <div className="w-10 h-10 bg-rust/10 flex items-center justify-center text-xl shrink-0">
+    <div className="flex items-center gap-6 py-6 border-b border-[var(--color-border-light)] group transition-all duration-300">
+        <div className="w-12 h-12 bg-white dark:bg-[#1a1a14] border border-[var(--color-border-light)] flex items-center justify-center text-xl shrink-0 group-hover:border-rust group-hover:bg-rust group-hover:text-white transition-all duration-300">
             {emoji}
         </div>
         <div className="flex flex-col min-w-0">
-            <span className="mono-tag text-muted mb-0.5">{label}</span>
+            <span className="text-[10px] uppercase tracking-[0.2em] text-muted mb-1 font-bold">{label}</span>
             <a
                 href={href}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
-                className="text-sm text-inkbrown dark:text-offwhite hover:text-rust transition-colors truncate"
+                className="text-sm md:text-base text-inkbrown dark:text-offwhite hover:text-rust transition-colors truncate font-medium"
             >
                 {value}
             </a>
@@ -267,12 +279,22 @@ interface FormFieldProps {
 }
 
 const FormField = ({ label, children, error }: FormFieldProps) => (
-    <div className="flex flex-col gap-2">
-        <label className="text-[10px] uppercase tracking-widest text-muted font-bold pl-0.5">
+    <div className="flex flex-col gap-1 group">
+        <label className="text-[10px] uppercase tracking-[0.2em] text-muted font-bold pl-0 transition-colors group-focus-within:text-rust">
             {label}
         </label>
         {children}
-        {error && <span className="text-red-400 text-xs mt-1">{error}</span>}
+        <AnimatePresence>
+            {error && (
+                <motion.span
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="text-red-500 text-[10px] uppercase tracking-wider font-bold mt-2"
+                >
+                    * {error}
+                </motion.span>
+            )}
+        </AnimatePresence>
     </div>
 );
 

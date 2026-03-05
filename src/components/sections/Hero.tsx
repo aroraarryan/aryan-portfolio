@@ -81,7 +81,7 @@ const Hero = () => {
                             View Projects
                         </Link>
                         <a
-                            href="/Aryan_Arora_Resume.pdf"
+                            href="/Aryan_resume.pdf"
                             download
                             className="btn-outline border-[#f0ece0] text-[#f0ece0] hover:bg-[#f0ece0] hover:text-[#1a1008]"
                         >

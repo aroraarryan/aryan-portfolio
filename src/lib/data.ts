@@ -71,28 +71,24 @@ export const SERVICES: Service[] = [
         title: "FULL-STACK DEVELOPMENT",
         description: "End-to-end web apps with React/Next.js frontend and Node.js or Django backend.",
         deliverables: ["React/Next.js frontend", "REST or GraphQL API", "Database design", "Deployment on Vercel"],
-        startingPrice: "₹15,000"
     },
     {
         id: "frontend",
         title: "FRONTEND DEVELOPMENT",
         description: "Pixel-perfect UI from Figma or briefs using React and Tailwind CSS.",
         deliverables: ["Component library", "Animations", "Responsive layouts", "WCAG AA accessibility"],
-        startingPrice: "₹8,000"
     },
     {
         id: "ai",
         title: "AI INTEGRATION",
         description: "Add intelligent features — recommendations, LLM integrations, Python data pipelines.",
         deliverables: ["API integration", "Custom recommendation logic", "Python pipeline", "Documentation"],
-        startingPrice: "₹12,000"
     },
     {
         id: "landing",
         title: "LANDING PAGES",
         description: "High-converting, SEO-optimised landing pages and portfolio sites.",
         deliverables: ["Design + development", "SEO metadata", "Contact form", "Live in 5 days"],
-        startingPrice: "₹5,000"
     }
 ];
 

@@ -89,7 +89,7 @@
   }
 
   .nav-link:hover {
-    color: var(--color-inkbrown);
+    /* Hover color handled dynamically in Navbar component */
   }
 
   .nav-link::after {
