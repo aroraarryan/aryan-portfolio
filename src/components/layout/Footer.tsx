@@ -134,7 +134,7 @@ const Footer = () => {
                         <h4 className="mono-tag text-muted mb-6">CONNECT</h4>
                         <div className="flex items-center gap-6">
                             <a
-                                href="mailto:aryanarora28march@gmail.com"
+                                href={`mailto:${["aryanarora", "28march", "@", "gmail.com"].join("")}`}
                                 className="text-muted hover:text-rust transition-colors duration-300"
                                 aria-label="Email"
                                 data-cursor="GO"

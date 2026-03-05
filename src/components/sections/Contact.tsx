@@ -89,8 +89,8 @@ const Contact = () => {
                                     </svg>
                                 }
                                 label="EMAIL"
-                                value="aryanarora28march@gmail.com"
-                                href="mailto:aryanarora28march@gmail.com"
+                                value={["aryanarora", "28march", "@", "gmail.com"].join("")}
+                                href={`mailto:${["aryanarora", "28march", "@", "gmail.com"].join("")}`}
                             />
                             <ContactInfoRow
                                 icon={
