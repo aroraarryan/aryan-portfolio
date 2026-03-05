@@ -35,8 +35,11 @@ const Contact = () => {
         },
     });
 
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
     const onSubmit = async (data: ContactFormData) => {
         setStatus("loading");
+        setErrorMessage(null);
         try {
             const response = await fetch("/api/contact", {
                 method: "POST",
@@ -48,10 +51,13 @@ const Contact = () => {
                 setStatus("success");
                 reset();
             } else {
+                const errorData = await response.json().catch(() => ({}));
+                setErrorMessage(errorData.message || "Unable to transmit message. Please try again.");
                 setStatus("error");
             }
         } catch (error) {
-            console.error(error);
+            console.error("Submission Error:", error);
+            setErrorMessage("Network error. Please check your connection.");
             setStatus("error");
         }
     };
@@ -214,9 +220,11 @@ const Contact = () => {
                                             </button>
 
                                             {status === "error" && (
-                                                <p className="text-xs text-red-500 mt-4 font-mono uppercase tracking-wider">
-                                                    Error: Unable to transmit message. Please try again.
-                                                </p>
+                                                <div className="mt-4">
+                                                    <p className="text-xs text-red-500 font-mono uppercase tracking-wider">
+                                                        Error: {errorMessage || "Unable to transmit message. Please try again."}
+                                                    </p>
+                                                </div>
                                             )}
                                         </div>
                                     </motion.form>

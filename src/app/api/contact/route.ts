@@ -26,13 +26,33 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Spam detected" }, { status: 400 });
     }
 
+    const {
+      SMTP_HOST,
+      SMTP_PORT,
+      SMTP_USER,
+      SMTP_PASS,
+      CONTACT_TO_EMAIL
+    } = process.env;
+
+    if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS || !CONTACT_TO_EMAIL) {
+      console.error("Missing environment variables for contact form");
+      return NextResponse.json(
+        { error: "Configuration Error", message: "Server is not properly configured to send emails." },
+        { status: 500 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: Number(process.env.SMTP_PORT) === 465,
+      host: SMTP_HOST,
+      port: Number(SMTP_PORT),
+      secure: Number(SMTP_PORT) === 465,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: SMTP_USER,
+        pass: SMTP_PASS,
+      },
+      tls: {
+        // Essential for some hosting providers like Netlify
+        rejectUnauthorized: false,
       },
     });
 
@@ -74,8 +94,24 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error("Contact Form Error:", error);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  } catch (error: any) {
+    console.error("Contact Form error:", error);
+
+    // Log configuration state (safe for production debugging)
+    console.log("Configuration Check:", {
+      hasHost: !!process.env.SMTP_HOST,
+      hasPort: !!process.env.SMTP_PORT,
+      hasUser: !!process.env.SMTP_USER,
+      hasPass: !!process.env.SMTP_PASS,
+      hasToEmail: !!process.env.CONTACT_TO_EMAIL,
+    });
+
+    return NextResponse.json(
+      {
+        error: "Server Error",
+        message: error?.message || "Unknown error occurred"
+      },
+      { status: 500 }
+    );
   }
 }
