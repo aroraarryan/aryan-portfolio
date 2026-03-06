@@ -6,10 +6,12 @@ import Projects from "@/components/sections/Projects";
 import Services from "@/components/sections/Services";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
+import LoadingScreen from "@/components/layout/LoadingScreen";
 
 export default function Home() {
     return (
         <div className="grain">
+            <LoadingScreen />
             <a
                 href="#main-content"
                 className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 btn-rust"
