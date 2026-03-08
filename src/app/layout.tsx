@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Brutalist",
+  title: "Aryan Arora",
   description: "Minimalist and brutalist portfolio website",
 };
 
