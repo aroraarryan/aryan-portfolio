@@ -1,33 +1,26 @@
-import Navbar from "@/components/layout/Navbar";
-import Hero from "@/components/sections/Hero";
-import About from "@/components/sections/About";
-import Resume from "@/components/sections/Resume";
-import Projects from "@/components/sections/Projects";
-import Services from "@/components/sections/Services";
-import Contact from "@/components/sections/Contact";
-import Footer from "@/components/layout/Footer";
-import LoadingScreen from "@/components/layout/LoadingScreen";
+"use client";
+
+import { useState } from "react";
+
+import Hero from "@/components/Hero";
+import ProjectsGallery from "@/components/ProjectsGallery";
+import Footer from "@/components/Footer";
+import GrainOverlay from "@/components/GrainOverlay";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Home() {
-    return (
-        <div className="grain">
-            <LoadingScreen />
-            <a
-                href="#main-content"
-                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 btn-rust"
-            >
-                Skip to content
-            </a>
-            <Navbar />
-            <main id="main-content">
-                <Hero />
-                <About />
-                <Resume />
-                <Projects />
-                <Services />
-                <Contact />
-            </main>
-            <Footer />
-        </div>
-    );
+  const [isLoading, setIsLoading] = useState(true);
+
+  return (
+    <>
+      <LoadingScreen isLoading={isLoading} onComplete={() => setIsLoading(false)} />
+
+      <main className="flex min-h-screen flex-col bg-black">
+        <GrainOverlay />
+        <Hero isLoading={isLoading} />
+        <ProjectsGallery />
+        <Footer />
+      </main>
+    </>
+  );
 }
