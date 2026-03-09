@@ -6,7 +6,7 @@ import Lottie from "lottie-react";
 import homeLoopAnim from "@/assets/HomeLoop.json";
 
 export default function PageTransitionLoader() {
-       const { isTransitioning, progress } = useTransition();
+       const { isTransitioning, progress, title } = useTransition();
 
        return (
               <AnimatePresence>
@@ -25,7 +25,7 @@ export default function PageTransitionLoader() {
                                           transition={{ duration: 0.8, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
                                           className="text-7xl md:text-9xl font-playfair font-light tracking-tighter mb-4"
                                    >
-                                          About
+                                          {title}
                                    </motion.h1>
 
                                    {/* Progress Percent */}

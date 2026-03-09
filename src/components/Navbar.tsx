@@ -82,12 +82,12 @@ export default function Navbar() {
 
                      {/* Right section: Contact */}
                      <div className="w-1/4 md:w-1/5 flex justify-end items-center px-4 md:px-8">
-                            <Link
-                                   href={pathname === "/" ? "#contact" : "/#contact"}
-                                   className="text-xs md:text-sm font-medium tracking-widest uppercase hover:opacity-75 transition-opacity"
+                            <div
+                                   onClick={() => startTransition("/contact")}
+                                   className="text-xs md:text-sm font-medium tracking-widest uppercase hover:opacity-75 transition-opacity cursor-pointer"
                             >
                                    CONTACT
-                            </Link>
+                            </div>
                      </div>
               </motion.nav>
        );

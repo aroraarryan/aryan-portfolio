@@ -1,10 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useRef, useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring, useVelocity, useTransform, useMotionTemplate } from "framer-motion";
+import { useTransition } from "@/context/TransitionContext";
 
 export default function Footer() {
+       const router = useRouter();
+       const { startTransition } = useTransition();
        const footerRef = useRef<HTMLElement>(null);
        const [isHovered, setIsHovered] = useState(false);
 
@@ -77,15 +81,21 @@ export default function Footer() {
 
                             {/* Navigation Links */}
                             <div className="flex flex-col gap-2 w-full md:w-1/2 lg:w-1/3 mb-16 md:mb-0">
-                                   <Link href="#contact" className="text-[#FF4500] text-sm md:text-base font-medium tracking-widest uppercase hover:text-white transition-colors w-max">
+                                   <div
+                                          onClick={() => startTransition("/contact")}
+                                          className="text-[#FF4500] text-sm md:text-base font-medium tracking-widest uppercase hover:text-white transition-colors w-max cursor-pointer"
+                                   >
                                           CONTACT
-                                   </Link>
-                                   <Link href="#projects" className="text-[#FF4500] text-sm md:text-base font-medium tracking-widest uppercase hover:text-white transition-colors w-max">
+                                   </div>
+                                   <Link href="/#projects" className="text-[#FF4500] text-sm md:text-base font-medium tracking-widest uppercase hover:text-white transition-colors w-max">
                                           PROJECTS
                                    </Link>
-                                   <Link href="#about" className="text-[#FF4500] text-sm md:text-base font-medium tracking-widest uppercase hover:text-white transition-colors w-max">
+                                   <div
+                                          onClick={() => startTransition("/about")}
+                                          className="text-[#FF4500] text-sm md:text-base font-medium tracking-widest uppercase hover:text-white transition-colors w-max cursor-pointer"
+                                   >
                                           ABOUT
-                                   </Link>
+                                   </div>
 
                                    <div className="mt-12 text-[#8A8A8A] text-xs md:text-sm uppercase tracking-widest leading-relaxed">
                                           <p>© 2026 — DESIGNED + BUILT</p>

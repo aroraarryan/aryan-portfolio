@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 interface TransitionContextType {
        isTransitioning: boolean;
        progress: number;
+       title: string;
        startTransition: (href: string) => Promise<void>;
 }
 
@@ -14,14 +15,20 @@ const TransitionContext = createContext<TransitionContextType | undefined>(undef
 export function TransitionProvider({ children }: { children: ReactNode }) {
        const [isTransitioning, setIsTransitioning] = useState(false);
        const [progress, setProgress] = useState(0);
+       const [title, setTitle] = useState("");
        const router = useRouter();
 
        const startTransition = async (href: string) => {
+              // Infer title from href
+              const targetTitle = href.includes("about") ? "About" :
+                     href.includes("contact") ? "Contact" : "";
+
+              setTitle(targetTitle);
               setIsTransitioning(true);
               setProgress(0);
 
               // Simulate progress
-              const duration = 3000; // Increased to 3 seconds as requested
+              const duration = 3000;
               const interval = 20;
               const increment = (interval / duration) * 100;
 
@@ -35,22 +42,19 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
                      });
               }, interval);
 
-              // Wait for the loader to reach 100% or close to it
               await new Promise((resolve) => setTimeout(resolve, duration));
 
-              // Redirect
               router.push(href);
 
-              // Give some time for the new page to load (or at least start loading)
-              // and then reset the transition state
               setTimeout(() => {
                      setIsTransitioning(false);
                      setProgress(0);
-              }, 1000); // Wait for fade out
+                     setTitle("");
+              }, 1000);
        };
 
        return (
-              <TransitionContext.Provider value={{ isTransitioning, progress, startTransition }}>
+              <TransitionContext.Provider value={{ isTransitioning, progress, title, startTransition }}>
                      {children}
               </TransitionContext.Provider>
        );
