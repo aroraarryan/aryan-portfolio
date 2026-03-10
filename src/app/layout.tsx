@@ -17,9 +17,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Brutalist",
+  title: "Portfolio | Aryan Arora",
   description: "Minimalist and brutalist portfolio website",
 };
+
+import { TransitionProvider } from "@/context/TransitionContext";
+import PageTransitionLoader from "@/components/PageTransitionLoader";
 
 export default function RootLayout({
   children,
@@ -31,11 +34,14 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased bg-black text-white`}
       >
-        <SmoothScroll>
-          <CustomCursor />
-          <Navbar />
-          {children}
-        </SmoothScroll>
+        <TransitionProvider>
+          <SmoothScroll>
+            <CustomCursor />
+            <Navbar />
+            <PageTransitionLoader />
+            {children}
+          </SmoothScroll>
+        </TransitionProvider>
       </body>
     </html>
   );

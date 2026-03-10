@@ -101,13 +101,13 @@ export default function Hero({ isLoading = false }: HeroProps) {
                                                  Beautiful
                                           </h1>
                                    </Magnetic>
-                                   <div className="flex flex-nowrap items-baseline gap-x-4 md:gap-x-6 relative w-full mt-[-0.5vw] md:mt-[-0.2vw]">
+                                   <div className="flex flex-nowrap items-baseline gap-x-2 md:gap-x-4 relative w-full mt-[-0.5vw] md:mt-[-0.2vw]">
                                           <Magnetic>
                                                  <h1 className="text-[18vw] md:text-[7vw] leading-[0.9] font-black uppercase tracking-tighter text-white whitespace-nowrap cursor-default">
                                                         Modern
                                                  </h1>
                                           </Magnetic>
-                                          <div className="relative flex items-end overflow-visible min-w-[30vw] md:min-w-[15vw]">
+                                          <div className="relative flex items-baseline overflow-visible min-w-[30vw] md:min-w-[15vw] h-full">
                                                  <AnimatePresence mode="wait">
                                                         <motion.div
                                                                key={wordIndex}
@@ -115,7 +115,7 @@ export default function Hero({ isLoading = false }: HeroProps) {
                                                                animate={{ opacity: 1, y: 0 }}
                                                                exit={{ opacity: 0, y: -15 }}
                                                                transition={{ duration: 0.4, ease: "easeInOut" }}
-                                                               className="absolute left-0 bottom-[1.5vw] md:bottom-[0.8vw] font-playfair-serif italic font-light lowercase text-[#FF4500] text-[20vw] md:text-[8.5vw] leading-[0.8] tracking-normal whitespace-nowrap"
+                                                               className="absolute left-0 bottom-[1vw] md:bottom-[0.5vw] font-playfair italic font-light lowercase text-[#FF4500] text-[20vw] md:text-[8.5vw] leading-[0.8] tracking-normal whitespace-nowrap"
                                                         >
                                                                {ANIMATED_WORDS[wordIndex]}
                                                         </motion.div>

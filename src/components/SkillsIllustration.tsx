@@ -11,7 +11,7 @@ interface SkillsIllustrationProps {
 export default function SkillsIllustration({ className = "" }: SkillsIllustrationProps) {
        return (
               <div className={`w-full h-full relative flex items-center justify-center ${className}`}>
-                     <div className="w-full h-full max-w-[500px] max-h-[500px] flex items-center justify-center invert filter brightness-90 contrast-125">
+                     <div className="w-full h-full max-w-[650px] max-h-[650px] flex items-center justify-center invert filter brightness-90 contrast-125">
                             <Lottie
                                    animationData={skillsAnimationData}
                                    loop={true}

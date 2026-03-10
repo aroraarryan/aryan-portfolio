@@ -5,11 +5,18 @@ import Image from "next/image";
 import { useRef } from "react";
 import Lottie from "lottie-react";
 import homeLoopAnim from "@/assets/HomeLoop.json";
+import benchAnim from "@/assets/BenchIllustration.json";
 import Footer from "@/components/Footer";
 import SkillsIllustration from "@/components/SkillsIllustration";
 
 export default function AboutPage() {
+       const imageSectionRef = useRef(null);
+       const { scrollYProgress } = useScroll({
+              target: imageSectionRef,
+              offset: ["start end", "end start"],
+       });
 
+       const imageY = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
 
        return (
               <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
@@ -112,7 +119,7 @@ export default function AboutPage() {
                             <div className="flex flex-col md:flex-row w-full min-h-[150vh]">
                                    {/* Sticky Lottie Column (Left) */}
                                    <div className="w-full md:w-1/2 md:sticky md:top-0 h-[50vh] md:h-screen flex items-center justify-center p-8 md:p-20">
-                                          <div className="w-full max-w-[400px] h-[400px] md:h-[500px]">
+                                          <div className="w-full max-w-[500px] h-[500px] md:h-[650px]">
                                                  <SkillsIllustration />
                                           </div>
                                    </div>
@@ -166,12 +173,36 @@ export default function AboutPage() {
                             </div>
                      </section>
 
+                     {/* 4.5. Personal Image Showcase */}
+                     <section ref={imageSectionRef} className="relative w-full h-[80vh] md:h-[110vh] overflow-hidden z-20 border-t border-white/5 group">
+                            <motion.div style={{ y: imageY, height: "130%", top: "-15%" }} className="absolute inset-0 w-full">
+                                   <Image
+                                          src="/me.JPG"
+                                          alt="Personal Showcase"
+                                          fill
+                                          className="object-cover transition-all duration-1000"
+                                          priority
+                                   />
+                            </motion.div>
+                     </section>
+
                      {/* 5. Grand Contact/Say Hello Section */}
-                     <section className="relative w-full bg-[#0a0a0a] text-white z-20 flex flex-col items-center justify-center min-h-[100vh] py-32 border-t border-white/5">
+                     <section className="relative w-full bg-[#111111] text-white z-20 flex flex-col items-center justify-start min-h-[100vh] pt-10 md:pt-16 pb-32 border-t border-white/5">
                             {/* Central Lottie */}
-                            <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] opacity-90 invert filter mb-8 md:mb-12">
-                                   <Lottie animationData={homeLoopAnim} loop={true} autoPlay={true} className="w-full h-full object-contain" />
+                            <div className="w-[350px] h-[350px] md:w-[600px] md:h-[600px] mb-4 md:mb-4">
+                                   <Lottie animationData={benchAnim} loop={true} autoPlay={true} className="w-full h-full object-contain" />
                             </div>
+
+                            {/* Short Bio Tagline */}
+                            <motion.p
+                                   initial={{ opacity: 0, y: 10 }}
+                                   whileInView={{ opacity: 1, y: 0 }}
+                                   viewport={{ once: true }}
+                                   transition={{ duration: 0.8 }}
+                                   className="text-white/60 text-sm md:text-base font-medium tracking-wide -mt-10 md:-mt-20 mb-12 md:mb-20 text-center"
+                            >
+                                   Just an ordinary software developer. From India with love
+                            </motion.p>
 
                             {/* Massive Typography */}
                             <div className="text-center group cursor-pointer flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8">
@@ -181,7 +212,7 @@ export default function AboutPage() {
                                           whileInView={{ opacity: 1, y: 0 }}
                                           viewport={{ once: true }}
                                           transition={{ duration: 1 }}
-                                          className="text-[15vw] md:text-[12vw] font-playfair italic lowercase leading-none hover:text-[#FF4500] transition-colors"
+                                          className="text-[10vw] md:text-[7vw] font-playfair italic lowercase leading-none hover:text-[#FF4500] transition-colors"
                                    >
                                           Say
                                    </motion.a>
@@ -191,7 +222,7 @@ export default function AboutPage() {
                                           whileInView={{ opacity: 1, y: 0 }}
                                           viewport={{ once: true }}
                                           transition={{ duration: 1, delay: 0.1 }}
-                                          className="text-[15vw] md:text-[12vw] font-bold uppercase tracking-tighter leading-none hover:text-[#FF4500] transition-colors"
+                                          className="text-[10vw] md:text-[7vw] font-bold uppercase tracking-tighter leading-none hover:text-[#FF4500] transition-colors"
                                    >
                                           Hello.
                                    </motion.a>
