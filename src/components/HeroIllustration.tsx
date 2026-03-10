@@ -1,9 +1,12 @@
 "use client";
 
 import React from "react";
-import Lottie from "lottie-react";
+import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
 import animationData from "../assets/HomeLoop.json";
+
+// Dynamically import Lottie with no SSR
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 interface HeroIllustrationProps {
        isLoading?: boolean;

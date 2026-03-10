@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
 import { NextResponse } from 'next/server';
 
+import { contactSchema } from '@/lib/validations';
+
 const MY_EMAIL = 'aryanarora28march@gmail.com';
 
 // Create a transporter using SMTP
@@ -16,7 +18,19 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: Request) {
        try {
-              const { name, email, subject, message } = await request.json();
+              const body = await request.json();
+
+              // Validate input
+              const validatedData = contactSchema.safeParse(body);
+
+              if (!validatedData.success) {
+                     return NextResponse.json({
+                            error: 'Validation failed',
+                            details: validatedData.error.flatten().fieldErrors
+                     }, { status: 400 });
+              }
+
+              const { name, email, subject, message } = validatedData.data;
 
               // Check if SMTP is configured
               if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {

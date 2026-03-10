@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useVelocity, useMotionTemplate } from "framer-motion";
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 const projects = [
        {
@@ -145,10 +146,12 @@ export default function ProjectsGallery() {
                                                         {/* Project Image */}
                                                         <div className={`w-full md:w-1/2 h-full overflow-hidden ${index % 2 !== 0 ? 'md:order-1' : ''}`}>
                                                                <div className="w-full h-full relative group cursor-pointer overflow-hidden">
-                                                                      <img
+                                                                      <Image
                                                                              src={project.image}
                                                                              alt={project.title}
-                                                                             className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                                                                             fill
+                                                                             className="object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-[0.16,1,0.3,1]"
+                                                                             sizes="(max-width: 768px) 100vw, 50vw"
                                                                       />
                                                                       <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
                                                                </div>

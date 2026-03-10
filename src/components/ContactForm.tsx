@@ -11,26 +11,36 @@ export default function ContactForm() {
               email: "",
               subject: "",
               message: "",
+              honeypot: "", // Honeypot field for bot protection
        });
 
        const handleSubmit = async (e: React.FormEvent) => {
               e.preventDefault();
+
+              // Simple honeypot check
+              if (formData.honeypot) {
+                     console.log("Bot detected!");
+                     setStatus("success"); // Fake success to mislead bot
+                     return;
+              }
+
               setStatus("loading");
 
               try {
+                     const { honeypot, ...dataToSend } = formData;
                      const response = await fetch("/api/send", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(formData),
+                            body: JSON.stringify(dataToSend),
                      });
 
                      if (response.ok) {
                             setStatus("success");
-                            setFormData({ name: "", email: "", subject: "", message: "" });
+                            setFormData({ name: "", email: "", subject: "", message: "", honeypot: "" });
                      } else {
                             setStatus("error");
                      }
-              } catch (error) {
+              } catch {
                      setStatus("error");
               }
        };
@@ -50,7 +60,7 @@ export default function ContactForm() {
                                           <CheckCircle2 className="w-16 h-16 text-[#FF4500] mb-6" />
                                           <h3 className="text-3xl font-black uppercase tracking-tighter mb-4">Message Sent</h3>
                                           <p className="text-[#8A8A8A] max-w-xs">
-                                                 Thank you for reaching out. I've received your message and will get back to you shortly.
+                                                 Thank you for reaching out. I&apos;ve received your message and will get back to you shortly.
                                           </p>
                                           <button
                                                  onClick={() => setStatus("idle")}
@@ -111,6 +121,18 @@ export default function ContactForm() {
                                                         className={`${inputStyles} resize-none`}
                                                         value={formData.message}
                                                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                                 />
+                                          </div>
+
+                                          {/* Honeypot field (hidden from users) */}
+                                          <div className="hidden" aria-hidden="true">
+                                                 <input
+                                                        type="text"
+                                                        name="subject_alt"
+                                                        tabIndex={-1}
+                                                        autoComplete="off"
+                                                        value={formData.honeypot}
+                                                        onChange={(e) => setFormData({ ...formData, honeypot: e.target.value })}
                                                  />
                                           </div>
 
