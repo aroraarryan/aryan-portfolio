@@ -28,7 +28,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
               setProgress(0);
 
               // Simulate progress
-              const duration = 3000;
+              const duration = 1500;
               const interval = 20;
               const increment = (interval / duration) * 100;
 
@@ -50,7 +50,7 @@ export function TransitionProvider({ children }: { children: ReactNode }) {
                      setIsTransitioning(false);
                      setProgress(0);
                      setTitle("");
-              }, 1000);
+              }, 600);
        };
 
        return (
